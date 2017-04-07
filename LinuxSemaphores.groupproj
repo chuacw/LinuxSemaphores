@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{BE67D0B6-D760-4AA7-859B-72C435C7BD55}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="WaitSemaphore.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FireSemaphores.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="WaitSemaphore">
+        <MSBuild Projects="WaitSemaphore.dproj"/>
+    </Target>
+    <Target Name="WaitSemaphore:Clean">
+        <MSBuild Projects="WaitSemaphore.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="WaitSemaphore:Make">
+        <MSBuild Projects="WaitSemaphore.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="FireSemaphores">
+        <MSBuild Projects="FireSemaphores.dproj"/>
+    </Target>
+    <Target Name="FireSemaphores:Clean">
+        <MSBuild Projects="FireSemaphores.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FireSemaphores:Make">
+        <MSBuild Projects="FireSemaphores.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="WaitSemaphore;FireSemaphores"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="WaitSemaphore:Clean;FireSemaphores:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="WaitSemaphore:Make;FireSemaphores:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
